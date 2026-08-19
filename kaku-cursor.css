@@ -1,0 +1,165 @@
+/* ==========================================================
+   KAKU THE GREY TABBY CAT — CUSTOM INTERACTIVE CURSOR CSS
+   ========================================================== */
+
+/* Hide default cursor on mouse devices when Kaku is active */
+@media (pointer: fine) {
+  body.kaku-cursor-active,
+  body.kaku-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Master Fixed Container */
+#kakuCursorContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 10000;
+  display: none;
+}
+
+@media (pointer: fine) {
+  body.kaku-cursor-active #kakuCursorContainer {
+    display: block;
+  }
+}
+
+/* Kaku's Floating Wrapper (Centered on Pointer) */
+.kaku-cat-wrapper {
+  position: absolute;
+  top: -30px;
+  left: -40px;
+  width: 80px;
+  height: 48px;
+  pointer-events: none;
+  transform: translate3d(-200px, -200px, 0);
+  will-change: transform;
+  transition: opacity 0.2s ease;
+}
+
+/* The SVG Graphic */
+.kaku-cat-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.18));
+  transform-origin: center center;
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+}
+
+/* Direction Flip (Facing Left vs Right) */
+.kaku-flip-left .kaku-cat-svg {
+  transform: scaleX(-1);
+}
+
+/* Trotting / Running Animation */
+.kaku-moving .kaku-tail {
+  animation: kakuTailSwish 0.35s ease-in-out infinite alternate;
+}
+.kaku-moving .kaku-leg-front-near {
+  animation: kakuTrotNear 0.25s ease-in-out infinite alternate;
+}
+.kaku-moving .kaku-leg-back-near {
+  animation: kakuTrotFar 0.25s ease-in-out infinite alternate;
+}
+.kaku-moving .kaku-leg-front-far {
+  animation: kakuTrotFar 0.25s ease-in-out infinite alternate;
+}
+.kaku-moving .kaku-leg-back-far {
+  animation: kakuTrotNear 0.25s ease-in-out infinite alternate;
+}
+
+@keyframes kakuTailSwish {
+  0% { transform: rotate(-10deg); }
+  100% { transform: rotate(18deg); }
+}
+
+@keyframes kakuTrotNear {
+  0% { transform: rotate(-14deg); }
+  100% { transform: rotate(16deg); }
+}
+
+@keyframes kakuTrotFar {
+  0% { transform: rotate(16deg); }
+  100% { transform: rotate(-14deg); }
+}
+
+/* Hovering on Interactive Elements */
+.kaku-hover .kaku-cat-svg {
+  transform: scale(1.22) translateY(-6px);
+  filter: drop-shadow(0 6px 14px rgba(217, 119, 136, 0.35));
+}
+.kaku-flip-left.kaku-hover .kaku-cat-svg {
+  transform: scaleX(-1) scale(1.22) translateY(-6px);
+}
+
+/* Clicking / Pounce Action */
+.kaku-clicking .kaku-cat-svg {
+  transform: scale(0.9) translateY(8px) rotate(8deg);
+}
+.kaku-flip-left.kaku-clicking .kaku-cat-svg {
+  transform: scaleX(-1) scale(0.9) translateY(8px) rotate(-8deg);
+}
+
+/* Sleeping Idle State */
+.kaku-sleeping .kaku-cat-svg {
+  transform: translateY(4px) scale(0.92);
+  opacity: 0.88;
+}
+.kaku-flip-left.kaku-sleeping .kaku-cat-svg {
+  transform: scaleX(-1) translateY(4px) scale(0.92);
+}
+
+/* Cute Thought / Speech Bubble */
+.kaku-bubble {
+  position: absolute;
+  top: -24px;
+  left: 45px;
+  background: #ffffff;
+  border: 1.5px solid #d97788;
+  border-radius: 9999px;
+  padding: 2px 10px;
+  font-family: 'Kalam', 'Comic Sans MS', cursive, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #b85466;
+  box-shadow: 0 3px 10px rgba(217, 119, 136, 0.25);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(6px) scale(0.8);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+  z-index: 10001;
+}
+.kaku-flip-left .kaku-bubble {
+  left: -25px;
+}
+.kaku-bubble.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Floating Paw Print Trail */
+.kaku-paw-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  font-size: 15px;
+  opacity: 0.85;
+  animation: fadeKakuPaw 1.1s forwards cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  user-select: none;
+}
+@keyframes fadeKakuPaw {
+  0% { transform: scale(1) translateY(0) rotate(0deg); opacity: 0.85; }
+  100% { transform: scale(0.3) translateY(-16px) rotate(18deg); opacity: 0; }
+}
+
+/* Navbar Toggle Button Active State */
+.kaku-toggle-btn.active {
+  background: #fdf2f4;
+  border-color: #d97788;
+  box-shadow: 0 0 0 3px rgba(217, 119, 136, 0.2);
+}
